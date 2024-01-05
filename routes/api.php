@@ -5,6 +5,7 @@ use App\Http\Controllers\DirectorFilmController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\FilmControllerDirector;
 use App\Http\Controllers\FilmDirectorController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,16 +22,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['api' => 'api'], function () {
 
+    Route::get('home', [HomeController::class, 'getHome']);
+
     Route::apiResource('directors', DirectorController::class);
     Route::apiResource('films', FilmController::class);
 
     Route::get('director/films', [DirectorFilmController::class, 'getDirectorFilms']);
     Route::get('director/films_count', [DirectorFilmController::class, 'getDirectorCountFilms']);
+    Route::get('director/{id}/films_dto', [DirectorFilmController::class, 'getDirectorFilmsDTO']);
 
     Route::get('film/director', [FilmDirectorController::class, 'getFilmDirector']);
 
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+

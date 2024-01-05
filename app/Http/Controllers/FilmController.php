@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostFilm;
+use App\Http\Requests\StoreFilmRequest;
+use App\Http\Requests\UpdateFilmRequest;
 use App\Models\Film;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
@@ -12,6 +13,17 @@ class FilmController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/films",
+     *     summary="ALL FILMS",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
+     */
+
     public function index()
     {
         $films = Film::all();
@@ -30,17 +42,54 @@ class FilmController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostFilm $request)
-    {
+    /**
+     * @OA\Post(
+     *     path="/api/films",
+     *     summary="CREATE FILMS",
+    *     @OA\RequestBody(
+    *         required=true,
+    *         @OA\JsonContent(
+    *             required={"director_id"},
+    *             required={"name"},
+    *             @OA\Property(property="director_id", type="integer", example="1"),
+    *             @OA\Property(property="name", type="string", example="Value 1")
+    *         )
+    *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
+     */
 
-        $validate = $request->validate();
-        $film = Film::firstOrCreate($validate);
+
+    public function store(StoreFilmRequest $request)
+    {
+        $film = Film::firstOrCreate($request->input());
         return $film;
     }
 
     /**
      * Display the specified resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/films/{id}",
+     *     summary="SHOW A FILM",
+      *     @OA\Parameter(
+        *         name="id",
+        *         in="path",
+        *         required=true,
+        *         @OA\Schema(type="integer")
+        *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
+     */
+
+
     public function show(string $id)
     {
         $film = Film::find($id);
@@ -59,20 +108,59 @@ class FilmController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    /**
+     * @OA\Put(
+     *     path="/api/films/{id}",
+     *     summary="SHOW A FILM",
+      *     @OA\Parameter(
+        *         name="id",
+        *         in="path",
+        *         required=true,
+        *         @OA\Schema(type="integer")
+        *     ),
+            *     @OA\RequestBody(
+    *         required=true,
+    *         @OA\JsonContent(
+    *             required={"director_id"},
+    *             required={"name"},
+    *             @OA\Property(property="director_id", type="integer", example="1"),
+    *             @OA\Property(property="name", type="string", example="Value 1")
+    *         )
+    *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
+     */
+
+    public function update(UpdateFilmRequest $request, $id)
     {
-        $film = Film::find($id);
-
-        //$film->director_id =  $request->input('director_id');
-        $film->name = $request->input('name');
-        $film->update();
-
-        return $film;
+        $director = Film::findOrFail($id);
+        $director->update($request->input());
+        return $director;
     }
 
     /**
      * Remove the specified resource from storage.
      */
+         /**
+     * @OA\Delete(
+     *     path="/api/films/{id}",
+     *     summary="UPDATE A DIRECTOR",
+      *     @OA\Parameter(
+        *         name="id",
+        *         in="path",
+        *         required=true,
+        *         @OA\Schema(type="integer")
+        *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
+     */
+
     public function destroy($id)
     {
 

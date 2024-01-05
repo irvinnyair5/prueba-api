@@ -1,0 +1,321 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PRUEBA API REST",
+        "version": "v1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api"
+        }
+    ],
+    "paths": {
+        "/api/directors": {
+            "get": {
+                "summary": "ALL DIRECTORS",
+                "operationId": "0232862a597e188b8d6b90bcff38654f",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            },
+            "post": {
+                "summary": "CREATE DIRECTOR",
+                "operationId": "745ff928efedfec1f1958d43a96aeade",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Value 1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        },
+        "/api/directors/{id}": {
+            "get": {
+                "summary": "UPDATE A DIRECTOR",
+                "operationId": "e1fe8469701666f99eaefb3cf4946316",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            },
+            "put": {
+                "summary": "SHOW A DIRECTORS",
+                "operationId": "f077ea4bb08f19f10d07b83a10897496",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Value 1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "UPDATE A DIRECTOR",
+                "operationId": "c37df0e8f775c8408a0579a943904992",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        },
+        "/api/director/films": {
+            "get": {
+                "summary": "ALL DIRECTORS AND THEIR FILMS",
+                "operationId": "8125628c533280776829b0729b9a6c60",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        },
+        "/api/director/films_count": {
+            "get": {
+                "summary": "ALL DIRECTORS AND TOTAL THEIR FILMS",
+                "operationId": "135230f0adab3e4588548f0ee4b635d5",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        },
+        "/api/director/{id}/films_dto": {
+            "get": {
+                "summary": "SHOW A DIRECTORS, TOTAL THEIR FILMS AND DTO",
+                "operationId": "a9894003c307192bc1ed2f20e130f332",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        },
+        "/api/films": {
+            "get": {
+                "summary": "ALL FILMS",
+                "operationId": "271e474415d2f29bf3c163247c5f4639",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            },
+            "post": {
+                "summary": "CREATE FILMS",
+                "operationId": "ce1501bac824524d1e4706075650bf11",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "director_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Value 1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        },
+        "/api/films/{id}": {
+            "get": {
+                "summary": "SHOW A FILM",
+                "operationId": "bb11826b5087b0708ec01458c9053803",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            },
+            "put": {
+                "summary": "SHOW A FILM",
+                "operationId": "d2fbe78b6e79c3f1cfb5067d25f9a039",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "director_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Value 1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "UPDATE A DIRECTOR",
+                "operationId": "decacbac55d9f088563f35def674b92a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        },
+        "/api/film/director": {
+            "get": {
+                "summary": "ALL FILMS AND THEIR DIRECTOR",
+                "operationId": "e3a6d0848bd5fb545ae479253caca12c",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        },
+        "/api/home": {
+            "get": {
+                "summary": "Muestra un JSON de bienvenida",
+                "operationId": "2599ed2c043f2e8cc76f46b6f04a4018",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        }
+    }
+}

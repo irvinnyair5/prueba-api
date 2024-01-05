@@ -2,18 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostDirector;
+use App\Http\Requests\StoreDirectorRequest;
+use App\Http\Requests\UpdateDirectorRequest;
 use App\Models\Director;
 use Illuminate\Http\Request;
 
+use App\Repositories\DirectorRepositoryInterface;
+
 class DirectorController extends Controller
 {
+
+    protected $directorRepository;
+
+    public function __construct(DirectorRepositoryInterface $directorRepository)
+    {
+        $this->directorRepository = $directorRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/directors",
+     *     summary="ALL DIRECTORS",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
+     */
+
     public function index()
     {
-        $directors = Director::all();
+        $directors = $this->directorRepository->getAll();
 
         return $directors;
     }
@@ -29,21 +51,56 @@ class DirectorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostDirector $request)
+     /**
+     * @OA\Post(
+     *     path="/api/directors",
+     *     summary="CREATE DIRECTOR",
+    *     @OA\RequestBody(
+    *         required=true,
+    *         @OA\JsonContent(
+    *             required={"name"},
+    *             @OA\Property(property="name", type="string", example="Value 1")
+    *         )
+    *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
+     */
+
+    public function store(StoreDirectorRequest $request)
     {
 
-        $validate = $request->validate();
-        $director = Director::firstOrCreate($validate);
+        $director = Director::firstOrCreate($request->input());
         return $director;
 
     }
 
     /**
      * Display the specified resource.
+    */
+    /**
+     * @OA\Get(
+     *     path="/api/directors/{id}",
+     *     summary="UPDATE A DIRECTOR",
+      *     @OA\Parameter(
+        *         name="id",
+        *         in="path",
+        *         required=true,
+        *         @OA\Schema(type="integer")
+        *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
      */
+
     public function show(string $id)
     {
-        $director = Director::find($id);
+        //$director = Director::find($id);
+        $director = $this->directorRepository->findById($id);
         return $director;
     }
 
@@ -58,18 +115,57 @@ class DirectorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-    {
-        $director = Director::find($id);
-        $director->name = $request->input('name');
-        $director->update();
+     /**
+     * @OA\Put(
+     *     path="/api/directors/{id}",
+     *     summary="SHOW A DIRECTORS",
+      *     @OA\Parameter(
+        *         name="id",
+        *         in="path",
+        *         required=true,
+        *         @OA\Schema(type="integer")
+        *     ),
+            *     @OA\RequestBody(
+    *         required=true,
+    *         @OA\JsonContent(
+    *             required={"name"},
+    *             @OA\Property(property="name", type="string", example="Value 1")
+    *         )
+    *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
+     */
 
+    public function update(UpdateDirectorRequest $request, $id)
+    {
+        $director = Director::findOrFail($id);
+        $director->update($request->input());
         return $director;
     }
 
     /**
      * Remove the specified resource from storage.
      */
+     /**
+     * @OA\Delete(
+     *     path="/api/directors/{id}",
+     *     summary="UPDATE A DIRECTOR",
+      *     @OA\Parameter(
+        *         name="id",
+        *         in="path",
+        *         required=true,
+        *         @OA\Schema(type="integer")
+        *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operación exitosa"
+     *     )
+     * )
+     */
+
     public function destroy($id)
     {
         $director = Director::find($id);
