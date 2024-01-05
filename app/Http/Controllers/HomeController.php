@@ -23,7 +23,7 @@ class HomeController extends Controller
 /**
  * @OA\Get(
  *     path="/api/home",
- *     summary="Muestra un JSON de bienvenida",
+ *     summary="SHOW JSON FORM WELCOME",
  *     @OA\Response(
  *         response=200,
  *         description="Operación exitosa"

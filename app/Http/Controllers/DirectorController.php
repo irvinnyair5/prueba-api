@@ -83,7 +83,7 @@ class DirectorController extends Controller
     /**
      * @OA\Get(
      *     path="/api/directors/{id}",
-     *     summary="UPDATE A DIRECTOR",
+     *     summary="SHOW A DIRECTOR",
       *     @OA\Parameter(
         *         name="id",
         *         in="path",
@@ -118,7 +118,7 @@ class DirectorController extends Controller
      /**
      * @OA\Put(
      *     path="/api/directors/{id}",
-     *     summary="SHOW A DIRECTORS",
+     *     summary="UPDATE A DIRECTOR",
       *     @OA\Parameter(
         *         name="id",
         *         in="path",
@@ -152,7 +152,7 @@ class DirectorController extends Controller
      /**
      * @OA\Delete(
      *     path="/api/directors/{id}",
-     *     summary="UPDATE A DIRECTOR",
+     *     summary="DELETE A DIRECTOR",
       *     @OA\Parameter(
         *         name="id",
         *         in="path",

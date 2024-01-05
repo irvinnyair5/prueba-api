@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('director_id');
             $table->string('name');
-            $table->string('year')->nullable();
-            $table->string('gender')->nullable();
             $table->foreign('director_id')->references('id')->on('directors');
             $table->timestamps();
         });

@@ -45,13 +45,13 @@ class FilmController extends Controller
     /**
      * @OA\Post(
      *     path="/api/films",
-     *     summary="CREATE FILMS",
+     *     summary="CREATE FILM",
     *     @OA\RequestBody(
     *         required=true,
     *         @OA\JsonContent(
     *             required={"director_id"},
     *             required={"name"},
-    *             @OA\Property(property="director_id", type="integer", example="1"),
+    *             @OA\Property(property="director_id", type="integer", example="1", description="add director previously mind and recover id"),
     *             @OA\Property(property="name", type="string", example="Value 1")
     *         )
     *     ),
@@ -111,7 +111,7 @@ class FilmController extends Controller
     /**
      * @OA\Put(
      *     path="/api/films/{id}",
-     *     summary="SHOW A FILM",
+     *     summary="UPDATE A FILM",
       *     @OA\Parameter(
         *         name="id",
         *         in="path",
@@ -123,7 +123,7 @@ class FilmController extends Controller
     *         @OA\JsonContent(
     *             required={"director_id"},
     *             required={"name"},
-    *             @OA\Property(property="director_id", type="integer", example="1"),
+    *             @OA\Property(property="director_id", type="integer", example="1", description="add director previously mind and recover id"),
     *             @OA\Property(property="name", type="string", example="Value 1")
     *         )
     *     ),
@@ -147,7 +147,7 @@ class FilmController extends Controller
          /**
      * @OA\Delete(
      *     path="/api/films/{id}",
-     *     summary="UPDATE A DIRECTOR",
+     *     summary="DELETE A DIRECTOR",
       *     @OA\Parameter(
         *         name="id",
         *         in="path",
